@@ -1,0 +1,46 @@
+
+State Machine - |spj_riscv_core|Float_Add:spj_fp_add|pres_state
+Name pres_state.00 pres_state.SHIFT_MANT pres_state.START 
+pres_state.00 0 0 0 
+pres_state.START 1 0 1 
+pres_state.SHIFT_MANT 1 1 0 
+
+State Machine - |spj_riscv_core|spj_cache_4w_v2:dm_cache|Fetch_State
+Name Fetch_State.FETCH3 Fetch_State.FETCH2 Fetch_State.FETCH1 Fetch_State.FETCH0 
+Fetch_State.FETCH0 0 0 0 0 
+Fetch_State.FETCH1 0 0 1 1 
+Fetch_State.FETCH2 0 1 0 1 
+Fetch_State.FETCH3 1 0 0 1 
+
+State Machine - |spj_riscv_core|spj_cache_4w_v2:dm_cache|Writeback_State
+Name Writeback_State.WRITEBACK3 Writeback_State.WRITEBACK2 Writeback_State.WRITEBACK1 Writeback_State.WRITEBACK0 
+Writeback_State.WRITEBACK0 0 0 0 0 
+Writeback_State.WRITEBACK1 0 0 1 1 
+Writeback_State.WRITEBACK2 0 1 0 1 
+Writeback_State.WRITEBACK3 1 0 0 1 
+
+State Machine - |spj_riscv_core|spj_cache_4w_v2:dm_cache|Cache_Controller_State
+Name Cache_Controller_State.IDLE Cache_Controller_State.WRITEBACK Cache_Controller_State.FETCH 
+Cache_Controller_State.IDLE 0 0 0 
+Cache_Controller_State.FETCH 1 0 1 
+Cache_Controller_State.WRITEBACK 1 1 0 
+
+State Machine - |spj_riscv_core|spj_cache_4w_v2:pm_cache|Fetch_State
+Name Fetch_State.FETCH3 Fetch_State.FETCH2 Fetch_State.FETCH1 Fetch_State.FETCH0 
+Fetch_State.FETCH0 0 0 0 0 
+Fetch_State.FETCH1 0 0 1 1 
+Fetch_State.FETCH2 0 1 0 1 
+Fetch_State.FETCH3 1 0 0 1 
+
+State Machine - |spj_riscv_core|spj_cache_4w_v2:pm_cache|Writeback_State
+Name Writeback_State.WRITEBACK3 Writeback_State.WRITEBACK2 Writeback_State.WRITEBACK1 Writeback_State.WRITEBACK0 
+Writeback_State.WRITEBACK0 0 0 0 0 
+Writeback_State.WRITEBACK1 0 0 1 1 
+Writeback_State.WRITEBACK2 0 1 0 1 
+Writeback_State.WRITEBACK3 1 0 0 1 
+
+State Machine - |spj_riscv_core|spj_cache_4w_v2:pm_cache|Cache_Controller_State
+Name Cache_Controller_State.IDLE Cache_Controller_State.WRITEBACK Cache_Controller_State.FETCH 
+Cache_Controller_State.IDLE 0 0 0 
+Cache_Controller_State.FETCH 1 0 1 
+Cache_Controller_State.WRITEBACK 1 1 0 

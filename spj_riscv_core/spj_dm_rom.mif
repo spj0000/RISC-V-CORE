@@ -1,0 +1,12 @@
+-- Memory Initialization File
+-- Created by Sean Jacobs
+
+WIDTH = 14;
+DEPTH = 1024;
+
+ADDRESS_RADIX = DEC;
+DATA_RADIX = BIN;
+
+CONTENT BEGIN
+[0 .. 1023] : 0; % Fill rest of locations with 0 %
+END;

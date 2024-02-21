@@ -1,0 +1,473 @@
+// synopsys translate_off
+`timescale 1 ps / 1 ps
+// synopsys translate_on
+//----------------------------------------------------------------------------
+// spjRISC521pipe_v    Harvard    Seperate Mapped I/Os
+// (c) Dorin Patru 2022; Updated by Stefan Maczynski 2023
+// Modified for design specification by Sean Jacobs
+//----------------------------------------------------------------------------
+`define SIMULATION // REMOVE FOR FPGA EMULATION!
+// `define DISABLE_PIPELINE // Use for debuging issues with data-forwarding!
+`define CACHE // Use for Debugging issues with Cache Memory
+module spj_riscv_core (
+input             Resetn_pin    , // Reset, implemented with push-button on FPGA
+input             Clock_pin     , // Clock, implemented with Oscillator on FPGA
+input      [ 4:0] SW_pin        , // Four switches and remaining push-button
+output reg [ 7:0] Display_pin     // 8 LEDs
+);
+
+//----------------------------------------------------------------------------
+//-- Declare machine cycle and instruction cycle parameters
+//----------------------------------------------------------------------------
+
+// Instructions
+
+localparam [5:0] LD_IC   = 6'b000000 ; // Load
+localparam [5:0] ST_IC   = 6'b000001 ; // Store
+localparam [5:0] CPY_IC  = 6'b000010 ; // Copy
+localparam [5:0] JMP_IC  = 6'b000100 ; // Jump
+localparam [5:0] ADD_IC  = 6'b000101 ; // Add
+localparam [5:0] SUB_IC  = 6'b000110 ; // Subtract
+localparam [5:0] ADDC_IC = 6'b000111 ; // Add Constant
+localparam [5:0] SUBC_IC = 6'b001000 ; // Subtract Constant
+localparam [5:0] MUL_IC  = 6'b001001 ; // Multiply
+localparam [5:0] DIV_IC  = 6'b001010 ; // Divide 
+localparam [5:0] NOT_IC  = 6'b001011 ; // Not
+localparam [5:0] AND_IC  = 6'b001100 ; // And
+localparam [5:0] OR_IC   = 6'b001101 ; // Or
+localparam [5:0] XOR_IC  = 6'b001110 ; // Exclusive Or
+localparam [5:0] SRL_IC  = 6'b001111 ; // Shift Right Logical
+localparam [5:0] SRA_IC  = 6'b010000 ; // Shift Right Arithmetic
+localparam [5:0] IN_IC   = 6'b011001 ; // Read Input Peripherial
+localparam [5:0] OUT_IC  = 6'b011010 ; // Write Output Peripherial
+
+//Jump conditions
+localparam [3:0]  JU  = 4'b0000 ; // Jump Unconditional
+
+//----------------------------------------------------------------------------
+//-- Declare internal signals
+//----------------------------------------------------------------------------
+reg  [31:0]    R       [31:0] ; // Register File (RF) 32 32-bit registers
+reg            WR_DM          ; // Write-enable data-memory input
+reg            stall_mc0      ; // Stall Control Bits
+reg            stall_mc1      ; // Stall Control Bits
+reg            stall_mc2      ; // Stall Control Bits
+reg            stall_mc3      ; // Stall Control Bits
+reg  [31:0]    PC             ; // Program Counter
+reg  [31:0]    SP             ; // Stack Pointer
+reg  [31:0]    IR3            ; // Instruction Register 3
+reg  [31:0]    IR2            ; // Instruction Register 2
+reg  [31:0]    IR1            ; // Instruction Register 1
+reg  [31:0]    MAB            ; // Memory Address B
+reg  [31:0]    MAX            ; // Memory Address X
+reg  [31:0]    MAeff          ; // Memory Address Effective
+reg  [31:0]    DM_in          ; // Data-Memory Input
+reg  [31:0]    TA             ; // Temporary Input of Arithmetic-Logic-Unit "A"
+reg  [31:0]    TB             ; // Temporary Input of Arithmetic-Logic-Unit "B"
+reg  [31:0]    TALUH          ; // Temporary Output of Arithmetic-Logic-Unit "High"
+reg  [31:0]    TALUL          ; // Temporary Output of Arithmetic-Logic-Unit "Low"
+reg  [31:0]    Ri1            ; // Index within registerfile
+reg  [31:0]    Rj1            ; // Index within registerfile
+reg  [31:0]    Ri2            ; // Index within registerfile
+reg  [31:0]    Rj2            ; // Index within registerfile
+reg  [31:0]    Ri3            ; // Index within registerfile
+reg  [31:0]    Rj3            ; // Index within registerfile
+wire           Clock_not      ; // Inverted Clock
+wire [13:0]    PM_out         ; // Output of Program-Memory
+wire [13:0]    DM_out         ; // Output of Data-Memory
+wire           DM_Done        ; // Control Signal for Data Memory Cache
+wire           PM_Done        ; // Control Signal for Program Memory Cache
+integer        k              ; // Index for looping construct
+
+// RV32I Base Integer Instructions
+wire [6:0] opcode;
+wire [4:0] rd;
+wire [4:0] rs1;
+wire [4:0] rs2;
+wire [2:0] funct3;
+wire [6:0] funct7;
+
+// R-TYPE INSTRUCTION WORD FORMAT
+assign opcode = IR1[6:0];
+assign rd = IR1[11:7];
+assign funct3 = IR1[14:12];
+assign rs1 = IR1[19:15];
+assign rs2 = IR1[24:20];
+assign funct7 = IR1[31:25];
+
+
+//------------------------------------------------------------------------------------------------------------------------------------------
+// - In this architecture we are using a combination of structural and behavioral code.
+// - Care has to be excercised because the values assigned in the always block are visible outside of it only during the next clock cycle.
+// - The CPU, which is comprised of the Data-Path and Control-Unit, is modeled as a combination of CASE and IF statements (behavioral).
+// - The memories are called within the structural part of the code.
+// - We could model the memories as arrays, but that would result in less than optimal memory implementations.
+// - Later on we will want to add an hierarchcial memory subsystem.
+//------------------------------------------------------------------------------------------------------------------------------------------
+
+//------------------------------------------------------------------------------------------------------------------------------------------
+// Structural section of the code.  The order of the assignments doesn't matter.
+//------------------------------------------------------------------------------------------------------------------------------------------
+
+not clock_inverter ( Clock_not, Clock_pin ); // Using a language primative so timing analyzer can recognize the derived clock
+
+    // - Instantiating only 1KWord memories to save resources; (2^10)
+    // - I could instantiate up to 64KWords. (2^16)
+    // - Both memories are clock synchronous i.e., the address and input data are evaluated on a positive clock edge 
+    // - Note that we are using inverted clocks
+`ifndef CACHE
+    // Monolithic Program Memory
+    spjRISC521_rom1 my_rom(
+        .address    ( PC         [9:0] ), // input
+        .clock      ( Clock_not         ), // input
+        .q          ( PM_out     [13:0] )  // output // {OpCode, Ri, Rj} = PM_out
+    );
+    // Monolithic Data Memory
+    spjRISC521_init_ram my_ram (
+        .address    ( MAeff      [9:0] ), // input
+        .clock      ( Clock_not         ), // input
+        .data       ( DM_in      [13:0] ), // input
+        .wren       ( WR_DM             ), // input
+        .q          ( DM_out     [13:0] )  // output
+    );
+    assign PM_Done = 1'b1 ;
+    assign DM_Done = 1'b1 ;
+`else
+    // 2 caches one for DM and on for PM (set wr signal to 0)
+    // Program Memory Cache
+    spj_cache_4w_v2 pm_cache (
+        .Resetn      ( Resetn_pin            ), // input
+        .MEM_address ( PC             [11:0] ), // input   // Address coming from the CPU
+        .MEM_in      ( 14'b0                 ), // input   // Write-Back data from the CPU // Would this also be PC?
+        .WR          ( 1'b0                  ), // input   // Write-Enable from the CPU // Disabled to prevent writeback to Program Memory
+        .Clock       ( Clock_not             ), // input
+        .MEM_out     ( PM_out         [13:0] ), // output  // Data Stored at the Address pointed to by MEM_address
+        .Done        ( PM_Done               )  // output  // Data out is valid // Not sure what needs to be done here for integration
+    );
+    defparam pm_cache.main_mem.altsyncram_component.init_file = "spjRISC521_rom1.mif"; // Override mif selection -> Take note of this for your future labs! // Overwrite this file
+    // Data Memory Cache
+    spj_cache_4w_v2 dm_cache (
+        .Resetn      ( Resetn_pin       ), // input
+        .MEM_address ( MAeff     [11:0] ), // input   // Address coming from the CPU
+        .MEM_in      ( DM_in     [13:0] ), // input   // Write-Back data from the CPU
+        .WR          ( WR_DM            ), // input   // Write-Enable from the CPU
+        .Clock       ( Clock_not        ), // input
+        .MEM_out     ( DM_out    [13:0] ), // output  // Data Stored at the Address pointed to by MEM_address
+        .Done        ( DM_Done          )  // output  // Data out is valid // Not sure what needs to be done here for integration
+    );
+    defparam dm_cache.main_mem.altsyncram_component.init_file = "spj_dm_rom.mif"; // Override mif selection -> Take note of this for your future labs! // Overwrite this file
+`endif
+
+//------------------------------------------------------------------------------------------------------------------------------------------
+// - Behavioral section of the code.  Assignments are evaluated in order, i.e. sequentially.
+// - New assigned values are visible outside the always block only after it is exit.
+// - Last assigned value will be the exit value.
+//------------------------------------------------------------------------------------------------------------------------------------------
+always@(posedge Clock_pin) begin : my_CPU
+//----------------------------------------------------------------------------
+// RESET 
+//----------------------------------------------------------------------------
+if (Resetn_pin == 0) begin    
+    // - The reset is active low and clock synchronous.
+    // - Initialize registers.
+    PC = 32'h00000000; // Initialize the PC to point to the location of the FIRST instruction to be executed; location 0000 is arbitrary!
+    SP = 32'h03ffffff; // Initialize the SP 
+    for (k = 0; k < 32; k = k+1) begin R[k] = 0; end
+    MAB         = 32'd0;
+    MAX         = 32'd0;
+    MAeff       = 32'd0;
+    DM_in       = 32'd0;
+    TA          = 32'd0;
+    TB          = 32'd0;
+    TALUH       = 32'd0;
+    TALUL       = 32'd0;
+    Ri1         = 32'd0;
+    Rj1         = 32'd0;
+    Ri2         = 32'd0;
+    Rj2         = 32'd0;
+    Ri3         = 32'd0;
+    Rj3         = 32'd0;
+    Display_pin =  8'd0;
+    IR1         = 32'hffffffff; // All IRs are initialized to the "don't care OpCode value 0xffff
+    IR2         = 32'hffffffff;
+    IR3         = 32'hffffffff;
+    stall_mc0   =  1'b0; // The initialization of the stall_mc signals is necessary for the correct startup of the pipeline.
+    stall_mc1   =  1'b1;
+    stall_mc2   =  1'b1;
+    stall_mc3   =  1'b1;
+    WR_DM       =  1'b0;
+end // if (Resetn_pin == 0)
+else if (PM_Done && DM_Done) begin // Normal Operation
+// else begin
+//----------------------------------------------------------------------------
+// MACHINE CYCLE 3
+//----------------------------------------------------------------------------
+    // MC3 is executed first because its assignments might be needed by the instructions executing MC2 or MC1 to resolve data or control D/H.
+    // An instruction that has arrived in MC3 does not have any dependency.
+    if ((!stall_mc3) && (IR3 != 32'hFFFFFFFF)) begin 
+        case (IR3[13:8]) // Decode the OpCode of the IW
+            LD_IC: begin
+                R[IR3[3:0]] = DM_out;
+            end // LD_IC
+            ST_IC: begin
+                DM_in = R[IR3[3:0]];
+                WR_DM = 1'b1;
+            end // ST_IC
+            IN_IC: begin
+                R[IR3[7:4]] = SW_pin;
+            end
+            OUT_IC: begin
+                Display_pin = R[IR3[7:4]][7:0];
+            end
+            CPY_IC: begin
+                    R[IR3[7:4]] = TALUH;
+            end // CPY_IC
+            JMP_IC: begin
+                case (IR3[3:0])
+                    JU:  begin PC = MAeff; end
+                    default: PC = PC;
+                endcase
+            end // JMP_IC
+            MUL_IC, DIV_IC: begin
+                R[IR3[7:4]] = TALUH;
+                R[IR3[3:0]] = TALUL;
+            end // MUL_IC, DIV_IC
+            ADD_IC, SUB_IC, ADDC_IC, SUBC_IC, NOT_IC, AND_IC, OR_IC, XOR_IC, SRL_IC, SRA_IC: begin
+                R[IR3[7:4]] = TALUH;
+            end // ADD_IC, SUB_IC, ADDC_IC, SUBC_IC, NOT_IC, AND_IC, OR_IC, XOR_IC, SRL_IC, SRA_IC
+            default: begin // Default case should not be reached0
+                `ifdef SIMULATION
+                    $display("ERROR: Default Case Selection Reached from MC3 , OPCODE: %b @ %t",IR3[13:8], $time());
+                `endif
+            end // default
+        endcase // IR3[13:8]
+    end // stall_mc3
+//----------------------------------------------------------------------------
+// MACHINE CYCLE 2
+//----------------------------------------------------------------------------
+    if ((!stall_mc2) && (IR2 != 32'hFFFFFFFF)) begin
+        case (IR2[13:8]) // Decode the OpCode of the IW
+            LD_IC, JMP_IC: begin
+                MAeff = MAB + MAX; // Address Arithmetic to calculate the effective address
+                WR_DM = 1'b0; // For LD_IC we ensure here that WR_DM=0.
+            end // LD_IC, JMP_IC
+            ST_IC: begin
+                MAeff = MAB + MAX;
+            end // ST_IC
+            IN_IC, OUT_IC: begin
+                // nop
+            end
+            CPY_IC: begin
+                TALUH = TB;
+            end // CPY_IC
+            //----------------------------------------------------------------------------
+            // For all assignments that target TALUH we use TALUout.  This is 17-bits wide
+            //     to account for the value of the carry when necessary.
+            //----------------------------------------------------------------------------
+            ADD_IC, ADDC_IC: begin
+                TALUH = TA + TB;
+            end // ADD_IC, ADDC_IC
+            SUB_IC, SUBC_IC: begin
+                TALUH = TA - TB;
+            end // SUB_IC, SUBC_IC
+            MUL_IC: begin
+                {TALUL, TALUH} = TA * TB;
+            end // MUL_IC
+            DIV_IC: begin
+                TALUH = TA / TB;
+                TALUL = TA % TB;
+            end // DIV_IC
+            NOT_IC: begin
+                TALUH = ~TA; //Carry and Overflow are not affected by ~
+            end // NOT_IC
+            AND_IC: begin
+                TALUH = TA & TB; //Carry and Overflow are not affected by &
+            end // AND_IC
+            OR_IC: begin
+                TALUH = TA | TB; //Carry and Overflow are not affected by |
+            end // OR_IC
+            XOR_IC: begin
+                TALUH = TA ^ TB;
+            end // XOR_IC
+            SRL_IC: begin
+                TALUH = TA >> TB;
+            end // SRL_IC
+            SRA_IC: begin
+                {TALUL, TALUH} = {{14{TA[13]}},TA} >> TB;
+            end // SRA_IC
+            default: begin // Default case should not be reached
+                `ifdef SIMULATION
+                    $display("ERROR: Default Case Selection Reached from MC2 , OPCODE: %b @ %t",IR2[13:8], $time());
+                `endif
+            end //default
+        endcase // IR2[15:12]
+    end // stall_mc2
+//----------------------------------------------------------------------------
+// MACHINE CYCLE 1
+//----------------------------------------------------------------------------
+    if ((!stall_mc1) && (IR1 != 32'hffffffff)) begin // MC1, or Operand Fetch for manip inst, or Address_Fetch for transfer and flow control inst
+        case (IR1[13:8]) // Decode the OpCode of the IW
+            LD_IC, ST_IC, JMP_IC: begin
+                MAB = PM_out; // Load MAB with base address constant value embedded in IW-field; the value 0 emulates the Register Direct AM
+                PC = PC + 1'b1;// Increment the PC to point to the location of the next IW
+                if (Ri1 == 0) begin
+                    MAX = 0; 
+                end 
+                else if (Ri1 == Ri2) begin
+                    MAX = TALUH; // <-- DF-FU = Data Forwarding from the instruction in MC2 // Will Need to Fix this
+                end
+                else begin
+                    MAX = R[Ri1];
+                end
+            end //LD_IC, ST_IC, JMP_IC
+            IN_IC, OUT_IC: begin
+                //nop
+            end
+            CPY_IC: begin
+                if (Rj1 == Ri2) begin
+                    TB = TALUH; // <-- DF-FU = Data Forwarding from the instruction in MC2
+                end
+                else begin
+                    TB = R[Rj1];
+                end
+            end //CPY_IC
+            NOT_IC: begin
+                if (Ri1 == Ri2) begin
+                    TA = TALUH; // <-- DF-FU = Data Forwarding from the instruction in MC2
+                end
+                else begin
+                    TA = R[Ri1];
+                end
+            end // NOT_IC, SRA_IC, RRC_IC
+            ADDC_IC, SUBC_IC, SRA_IC, SRL_IC: begin 
+                if (Ri1 == Ri2) begin
+                    TA = TALUH; // <-- DF-FU
+                end
+                else begin
+                    TA = R[Ri1]; 
+                end
+                TB = {10'b0000000000, IR1[3:0]};
+            end // ADDC_IC, SUBC_IC
+            ADD_IC, SUB_IC, AND_IC, OR_IC, MUL_IC, DIV_IC, XOR_IC: begin
+                // DF-FU; Ri2 below is right for every previous instruction that returns a result in Ri2; 
+                if (Ri1 == Ri2) begin
+                    TA = TALUH; 
+                end
+                else begin
+                    TA = R[Ri1];
+                end
+                if (Rj1 == Ri2) begin
+                    TB = TALUH; 
+                end
+                else begin
+                    TB = R[Rj1]; 
+                end
+            end // ADD_IC, SUB_IC, AND_IC, OR_IC, MUL_IC, DIV_IC, XOR_IC, SRL_IC, ROTR_IC, ROTL_IC, RLN_IC, RLZ_IC, RRN_IC, RRZ_IC
+            default: begin // Default case should not be reached
+                `ifdef SIMULATION
+                    $display("ERROR: Default Case Selection Reached from MC1 , OPCODE: %b @ %t",IR1[13:8], $time());
+                `endif
+            end //default
+        endcase // IR1[15:12]
+    end // stall_mc1
+//----------------------------------------------------------------------------
+// MACHINE CYCLE 0 and Stall Control
+//----------------------------------------------------------------------------
+`ifndef DISABLE_PIPELINE
+    // The only data D/H that can occur are RAW.  These are automatically resolved.  
+    // In the case of the JUMPS we stall until the adress of the next instruction to be executed is known.
+    // The IR value 0xffff I call a "don't care" OpCode value.  
+    // It allows us to control the refill of the pipe after the stalls of a jump emptied it.
+    // Instruction in MC2 can move to MC3; 
+    // Below: Rj3 = Ri3 because the previous instruction returns a result in Ri2; 
+    //        need to modify for a previous SWAP
+    if ((!stall_mc2) && (IR3[13:8] != (JMP_IC))) begin 
+        IR3 = IR2;
+        Ri3 = Ri2;
+        Rj3 = Rj2;
+        stall_mc3 = 0;
+    end 
+    // Instruction in MC2 is stalled and IR3 is loaded with the "don't care IW"    
+    else begin 
+        stall_mc2 = 1; 
+        IR3 = 14'h3fff; 
+    end 
+    // Instruction in MC1 can move to MC2; Rj2 may need to be = Ri1 for certain instruction sequences
+    if ((!stall_mc1) && (IR2[13:8] != (JMP_IC))) begin 
+        IR2 = IR1;
+        Ri2 = Ri1;
+        Rj2 = Rj1;
+        stall_mc2 = 0;
+    end
+    // Instruction in MC1 is stalled and IR2 is loaded with the "don't care IW"    
+    else begin
+        stall_mc1 = 1;
+        IR2 = 14'h3fff;
+    end 
+    // Instruction in MC0 can move to MC1;     
+    if ((!stall_mc0) && (IR1[13:8] != (JMP_IC || LD_IC || ST_IC))) begin
+        // Below: IW0 is fetched directly into IR1, Ri1, and Rj1
+        IR1 = PM_out; 
+        Ri1 = PM_out[7:4];
+        Rj1 = PM_out[3:0]; 
+        PC = PC + 1'b1; 
+        stall_mc1 = 0; 
+    end
+    // Instruction in MC0 is stalled and IR1 is loaded with the "don't care IW"    
+    else begin 
+        stall_mc0 = 1; 
+        IR1 = 14'h3fff; 
+    end 
+    // After the JMP_IC instruction reaches MC3 OR (LD_IC or ST_C) reach MC1,
+    // start refilling the pipe by removing the stalls. For JMP_IC the stalls are 
+    // removed in this order: stall_mc0 --> stall_mc1 --> stall_mc2
+    if ((IR3 == 14'h3fff) || (IR2[13:8] == (LD_IC || ST_IC || JMP_IC))) begin
+        stall_mc0 = 0; 
+    end
+`else // ifndef DISABLE_PIPELINE
+    // Alternative Operation Mode, Disables Pipeline
+    // For Debug and Benchmarking Purposes Only! -> This can help you find data-forwarding issues
+    if ((stall_mc0 == 0)) begin
+        IR1 = PM_out;
+        Ri1 = PM_out[7:4];
+        Rj1 = PM_out[3:0];
+        PC = PC + 1'b1;
+        stall_mc1 = 0;
+        stall_mc0 = 1;
+        IR2 = 14'h3fff;
+        IR3 = 14'h3fff;
+        Ri2 = 14'h3fff;
+        Rj2 = 14'h3fff;
+        Ri3 = 14'h3fff;
+        Rj3 = 14'h3fff;
+    end
+    else if ((stall_mc1 == 0)) begin
+        IR2 = IR1;
+        Ri2 = Ri1;
+        Rj2 = Rj1;
+        stall_mc2 = 0;
+        stall_mc1 = 1;
+        IR1 = 14'h3fff;
+        IR3 = 14'h3fff;
+        Ri1 = 14'h3fff;
+        Rj1 = 14'h3fff;
+    end
+    else if ((stall_mc2 == 0)) begin
+        IR3 = IR2;
+        Ri3 = Ri2;
+        Rj3 = Ri3;
+        stall_mc3 = 0;
+        stall_mc2 = 1;
+        IR2 = 14'h3fff;
+        IR1 = 14'h3fff;
+        Ri2 = 14'h3fff;
+        Rj2 = 14'h3fff;
+    end
+    else if ((stall_mc3 == 0)) begin
+        stall_mc0 = 0;
+        stall_mc3 = 1;
+    end
+`endif // ifndef DISABLE_PIPELINE
+end // reset
+end // my_CPU
+endmodule

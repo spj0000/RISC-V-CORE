@@ -1,0 +1,35 @@
+Quartus Prime Archive log --	C:/Users/spjac/OneDrive/Documents/School_Work/EE721-ATDCS/spj_riscv_core/spj_riscv_core.qarlog
+
+Archive:	C:/Users/spjac/OneDrive/Documents/School_Work/EE721-ATDCS/spj_riscv_core/spj_riscv_core.qar
+Date:		Mon Feb 12 15:52:11 2024
+Quartus Prime		18.0.0 Build 614 04/24/2018 SJ Lite Edition
+
+	=========== Files Selected: ===========
+C:/Users/spjac/OneDrive/Documents/School_Work/EE721-ATDCS/spj_riscv_core/spjRISC521_ram1.qip
+C:/Users/spjac/OneDrive/Documents/School_Work/EE721-ATDCS/spj_riscv_core/spjRISC521_ram1.v
+C:/Users/spjac/OneDrive/Documents/School_Work/EE721-ATDCS/spj_riscv_core/spjRISC521_ram1_bb.v
+C:/Users/spjac/OneDrive/Documents/School_Work/EE721-ATDCS/spj_riscv_core/spjRISC521_rom1.mif
+C:/Users/spjac/OneDrive/Documents/School_Work/EE721-ATDCS/spj_riscv_core/spj_CAM_v2.v
+C:/Users/spjac/OneDrive/Documents/School_Work/EE721-ATDCS/spj_riscv_core/spj_cache_4w_v2.v
+C:/Users/spjac/OneDrive/Documents/School_Work/EE721-ATDCS/spj_riscv_core/spj_cache_v.v
+C:/Users/spjac/OneDrive/Documents/School_Work/EE721-ATDCS/spj_riscv_core/spj_dm_rom.mif
+C:/Users/spjac/OneDrive/Documents/School_Work/EE721-ATDCS/spj_riscv_core/spj_fp_adder.v
+C:/Users/spjac/OneDrive/Documents/School_Work/EE721-ATDCS/spj_riscv_core/spj_ir2assembly_v.v
+C:/Users/spjac/OneDrive/Documents/School_Work/EE721-ATDCS/spj_riscv_core/spj_risc_core_tb.v
+C:/Users/spjac/OneDrive/Documents/School_Work/EE721-ATDCS/spj_riscv_core/spj_riscv_core.qpf
+C:/Users/spjac/OneDrive/Documents/School_Work/EE721-ATDCS/spj_riscv_core/spj_riscv_core.qsf
+C:/Users/spjac/OneDrive/Documents/School_Work/EE721-ATDCS/spj_riscv_core/spj_riscv_core.v
+C:/Users/spjac/OneDrive/Documents/School_Work/EE721-ATDCS/spj_riscv_core/spj_riscv_ram1.qip
+C:/Users/spjac/OneDrive/Documents/School_Work/EE721-ATDCS/spj_riscv_core/spj_riscv_ram1.v
+C:/Users/spjac/OneDrive/Documents/School_Work/EE721-ATDCS/spj_riscv_core/spj_riscv_ram1_bb.v
+c:/intelfpga_lite/18.0/quartus/bin64/assignment_defaults.qdf
+	======= Total: 18 files to archive =======
+
+	================ Status: ===============
+All files archived successfully.
+
+
+******* Archived project restoration attempt on Fri Feb 16 13:12:41 2024
+Source archive file:	C:/Users/spjac/OneDrive/Documents/School_Work/EE721-ATDCS/spj_riscv_core/spj_riscv_core.qar
+Archive was extracted into	C:/Users/spjac/OneDrive/Documents/School_Work/EE721-ATDCS/spj_riscv_core/spj_riscv_core_restored/
+		 - successfully.

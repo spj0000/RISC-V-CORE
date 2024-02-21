@@ -1,0 +1,188 @@
+m255
+K4
+z2
+13
+!s112 1.1
+!i10d 8192
+!i10e 25
+!i10f 100
+cModel Technology
+Z0 dC:/Users/spjac/OneDrive/Documents/School_Work/EE721-ATDCS/spj_riscv_core/simulation/modelsim
+vFloat_Add
+Z1 !s110 1708533299
+!i10b 1
+!s100 G]N71bkLcnE>3bZ?77BM81
+I0jAIOW^bQ=c_DJBO4GHTm1
+Z2 VDg1SIo80bB@j0V0VzS_@n1
+R0
+w1707755544
+8C:/Users/spjac/OneDrive/Documents/School_Work/EE721-ATDCS/spj_riscv_core/spj_fp_adder.v
+FC:/Users/spjac/OneDrive/Documents/School_Work/EE721-ATDCS/spj_riscv_core/spj_fp_adder.v
+L0 9
+Z3 OV;L;10.5b;63
+r1
+!s85 0
+31
+Z4 !s108 1708533299.000000
+!s107 C:/Users/spjac/OneDrive/Documents/School_Work/EE721-ATDCS/spj_riscv_core/spj_fp_adder.v|
+!s90 -reportprogress|300|-vlog01compat|-work|work|+incdir+C:/Users/spjac/OneDrive/Documents/School_Work/EE721-ATDCS/spj_riscv_core|C:/Users/spjac/OneDrive/Documents/School_Work/EE721-ATDCS/spj_riscv_core/spj_fp_adder.v|
+!i113 1
+Z5 o-vlog01compat -work work
+Z6 !s92 -vlog01compat -work work +incdir+C:/Users/spjac/OneDrive/Documents/School_Work/EE721-ATDCS/spj_riscv_core
+Z7 tCvgOpt 0
+n@float_@add
+vspj_cache_4w_v2
+Z8 !s110 1708533300
+!i10b 1
+!s100 kS>7[5NP]n;5kkQ?kY=;V1
+Im6]kKhkP=2d18mPkFMFG<2
+R2
+R0
+w1708533248
+8C:/Users/spjac/OneDrive/Documents/School_Work/EE721-ATDCS/spj_riscv_core/spj_cache_4w_v2.v
+FC:/Users/spjac/OneDrive/Documents/School_Work/EE721-ATDCS/spj_riscv_core/spj_cache_4w_v2.v
+L0 21
+R3
+r1
+!s85 0
+31
+R4
+!s107 C:/Users/spjac/OneDrive/Documents/School_Work/EE721-ATDCS/spj_riscv_core/spj_cache_4w_v2.v|
+!s90 -reportprogress|300|-vlog01compat|-work|work|+incdir+C:/Users/spjac/OneDrive/Documents/School_Work/EE721-ATDCS/spj_riscv_core|C:/Users/spjac/OneDrive/Documents/School_Work/EE721-ATDCS/spj_riscv_core/spj_cache_4w_v2.v|
+!i113 1
+R5
+R6
+R7
+vspj_cache_v
+R1
+!i10b 1
+!s100 oAEbbW2ZYgmRQH`PT5Sm^2
+ILP_<=ULB5[lm@;1EdbiDY2
+R2
+R0
+w1706804919
+8C:/Users/spjac/OneDrive/Documents/School_Work/EE721-ATDCS/spj_riscv_core/spj_cache_v.v
+FC:/Users/spjac/OneDrive/Documents/School_Work/EE721-ATDCS/spj_riscv_core/spj_cache_v.v
+Z9 L0 39
+R3
+r1
+!s85 0
+31
+R4
+!s107 C:/Users/spjac/OneDrive/Documents/School_Work/EE721-ATDCS/spj_riscv_core/spj_cache_v.v|
+!s90 -reportprogress|300|-vlog01compat|-work|work|+incdir+C:/Users/spjac/OneDrive/Documents/School_Work/EE721-ATDCS/spj_riscv_core|C:/Users/spjac/OneDrive/Documents/School_Work/EE721-ATDCS/spj_riscv_core/spj_cache_v.v|
+!i113 1
+R5
+R6
+R7
+vspj_CAM_v2
+R1
+!i10b 1
+!s100 DK5G[O9?;>lkZ76K@D6^W3
+I8nbLhESH]fKjjhlne^n3n1
+R2
+R0
+w1699470722
+8C:/Users/spjac/OneDrive/Documents/School_Work/EE721-ATDCS/spj_riscv_core/spj_CAM_v2.v
+FC:/Users/spjac/OneDrive/Documents/School_Work/EE721-ATDCS/spj_riscv_core/spj_CAM_v2.v
+L0 8
+R3
+r1
+!s85 0
+31
+R4
+!s107 C:/Users/spjac/OneDrive/Documents/School_Work/EE721-ATDCS/spj_riscv_core/spj_CAM_v2.v|
+!s90 -reportprogress|300|-vlog01compat|-work|work|+incdir+C:/Users/spjac/OneDrive/Documents/School_Work/EE721-ATDCS/spj_riscv_core|C:/Users/spjac/OneDrive/Documents/School_Work/EE721-ATDCS/spj_riscv_core/spj_CAM_v2.v|
+!i113 1
+R5
+R6
+R7
+nspj_@c@a@m_v2
+vspj_ir2assembly_v
+R8
+!i10b 1
+!s100 5E:W0>_<?Qo5KCfYY`N0W3
+IK0N<YzUfjKgFi^8[9>VH21
+R2
+R0
+w1706886336
+8C:/Users/spjac/OneDrive/Documents/School_Work/EE721-ATDCS/spj_riscv_core/spj_ir2assembly_v.v
+FC:/Users/spjac/OneDrive/Documents/School_Work/EE721-ATDCS/spj_riscv_core/spj_ir2assembly_v.v
+L0 1
+R3
+r1
+!s85 0
+31
+Z10 !s108 1708533300.000000
+Z11 !s107 C:/Users/spjac/OneDrive/Documents/School_Work/EE721-ATDCS/spj_riscv_core/spj_ir2assembly_v.v|C:/Users/spjac/OneDrive/Documents/School_Work/EE721-ATDCS/spj_riscv_core/spj_risc_core_tb.v|
+Z12 !s90 -reportprogress|300|-vlog01compat|-work|work|+incdir+C:/Users/spjac/OneDrive/Documents/School_Work/EE721-ATDCS/spj_riscv_core|C:/Users/spjac/OneDrive/Documents/School_Work/EE721-ATDCS/spj_riscv_core/spj_risc_core_tb.v|
+!i113 1
+R5
+R6
+R7
+vspj_risc_core_tb
+R8
+!i10b 1
+!s100 mj]PQk70JQB?R`ZPPDC?G1
+I5Pgg1R0AJMTW6OY`ZNV0X0
+R2
+R0
+w1706885221
+8C:/Users/spjac/OneDrive/Documents/School_Work/EE721-ATDCS/spj_riscv_core/spj_risc_core_tb.v
+FC:/Users/spjac/OneDrive/Documents/School_Work/EE721-ATDCS/spj_riscv_core/spj_risc_core_tb.v
+L0 8
+R3
+r1
+!s85 0
+31
+R10
+R11
+R12
+!i113 1
+R5
+R6
+R7
+vspj_riscv_core
+R1
+!i10b 1
+!s100 m9FE2]f;nj7^>eh]DCn383
+INMU]BgD8]9a?lTKc5]RSn2
+R2
+R0
+w1707755606
+8C:/Users/spjac/OneDrive/Documents/School_Work/EE721-ATDCS/spj_riscv_core/spj_riscv_core.v
+FC:/Users/spjac/OneDrive/Documents/School_Work/EE721-ATDCS/spj_riscv_core/spj_riscv_core.v
+L0 12
+R3
+r1
+!s85 0
+31
+R4
+!s107 C:/Users/spjac/OneDrive/Documents/School_Work/EE721-ATDCS/spj_riscv_core/spj_riscv_core.v|
+!s90 -reportprogress|300|-vlog01compat|-work|work|+incdir+C:/Users/spjac/OneDrive/Documents/School_Work/EE721-ATDCS/spj_riscv_core|C:/Users/spjac/OneDrive/Documents/School_Work/EE721-ATDCS/spj_riscv_core/spj_riscv_core.v|
+!i113 1
+R5
+R6
+R7
+vspj_riscv_ram1
+R8
+!i10b 1
+!s100 F];hB1a@]lonBC<e;GZ3L2
+IF_Vk3_mhC3m:^4iPiKmY@3
+R2
+R0
+w1706804527
+8C:/Users/spjac/OneDrive/Documents/School_Work/EE721-ATDCS/spj_riscv_core/spj_riscv_ram1.v
+FC:/Users/spjac/OneDrive/Documents/School_Work/EE721-ATDCS/spj_riscv_core/spj_riscv_ram1.v
+R9
+R3
+r1
+!s85 0
+31
+R10
+!s107 C:/Users/spjac/OneDrive/Documents/School_Work/EE721-ATDCS/spj_riscv_core/spj_riscv_ram1.v|
+!s90 -reportprogress|300|-vlog01compat|-work|work|+incdir+C:/Users/spjac/OneDrive/Documents/School_Work/EE721-ATDCS/spj_riscv_core|C:/Users/spjac/OneDrive/Documents/School_Work/EE721-ATDCS/spj_riscv_core/spj_riscv_ram1.v|
+!i113 1
+R5
+R6
+R7

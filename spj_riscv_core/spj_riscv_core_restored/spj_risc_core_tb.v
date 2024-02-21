@@ -1,0 +1,102 @@
+// synopsys translate_off
+`timescale 1 ps / 1 ps
+// synopsys translate_on
+
+`include "spj_ir2assembly_v.v"
+`define SIMULATION
+
+module spj_risc_core_tb;
+
+reg         Resetn_tb       ; // Active low reset signal
+reg         Clock_tb        ;
+reg  [ 4:0] SW_in_tb        ; // Switches In
+wire [ 7:0] Display_out_tb  ; // LEDs Out
+
+wire [95:0] ICis_core0_MC3_tb     ; // Instruction to ASCII
+wire [95:0] ICis_core0_MC2_tb     ; // Instruction to ASCII
+wire [95:0] ICis_core0_MC1_tb     ; // Instruction to ASCII
+
+// Design under test instantiation
+
+// Single-Core DUT
+spj_riscv_core dut(
+    .Resetn_pin   ( Resetn_tb             ), // Reset, implemented with push-button on FPGA
+    .Clock_pin    ( Clock_tb              ), // Clock, implemented with Oscillator on FPGA
+    .SW_pin       ( SW_in_tb       [ 4:0] ), // Four switches and remaining push-button
+    .Display_pin  ( Display_out_tb [ 7:0] )  // 8 LEDs
+);
+
+// Instruction to Ascii Translators, note use of hierarchical/virtual routing
+spj_ir2assembly_v instruction_translate_1(
+    .IR           ( dut.IR1        [31:0] ), // Instruction word within dut
+    .Resetn_pin   ( dut.Resetn_pin        ), // Reset within dut
+    .ICis         ( ICis_core0_MC1_tb    [95:0] )  // ASCII stream translating IR from Binary to English
+);
+spj_ir2assembly_v instruction_translate_2(
+    .IR           ( dut.IR2        [31:0] ), // Instruction word within dut
+    .Resetn_pin   ( dut.Resetn_pin        ), // Reset within dut
+    .ICis         ( ICis_core0_MC2_tb    [95:0] )  // ASCII stream translating IR from Binary to English
+);
+spj_ir2assembly_v instruction_translate_3(
+    .IR           ( dut.IR3        [31:0] ), // Instruction word within dut
+    .Resetn_pin   ( dut.Resetn_pin        ), // Reset within dut
+    .ICis         ( ICis_core0_MC3_tb    [95:0] )  // ASCII stream translating IR from Binary to English
+);
+
+// Setup Free-Running Clock
+always #10000 Clock_tb = ~(Clock_tb === 1'd1);
+
+initial begin 
+    // Reset DUT
+    Resetn_tb = 1'd0;
+    SW_in_tb  = 5'b00000;
+    repeat (10) @(posedge Clock_tb);
+
+    // Take DUT out of Reset
+    Resetn_tb = 1'd1;
+
+    // Assert inputs to desired value
+    SW_in_tb  = 5'b00010;
+
+    forever begin
+        @(posedge Clock_tb);
+        repeat (100) begin
+            @(posedge Clock_tb);
+        end
+        $stop();
+    end
+end
+
+//     forever begin
+//         // Move performance counter inside the RTL
+//         @(posedge Clock_tb);
+//         // if(Display_out_tb[7] == 1'b1) begin
+//         //     perf_cnt = perf_cnt + 1;
+//         // end
+//         if(Display_out_tb == 8'b00000010) begin
+//             repeat (15) begin
+//                 @(posedge Clock_tb);
+//             end
+//             $stop();
+//         end
+//     end
+// end
+
+// // Runs a random push button presser in parrallel with the program
+// always @(posedge Clock_tb) begin
+//     pb_wait = $urandom;
+//     repeat(pb_wait) begin
+//         @(posedge Clock_tb);
+//     end
+//     SW_in_tb[0] = 1'b1;
+//     repeat(pb_wait) begin
+//         @(posedge Clock_tb);
+//     end
+//     SW_in_tb[0] = 1'b0;
+//     repeat(pb_wait) begin
+//         @(posedge Clock_tb);
+//     end
+//     SW_in_tb[0] = 1'b1;
+// end
+       
+endmodule
