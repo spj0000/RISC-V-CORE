@@ -488,9 +488,6 @@ else if (PM_Done && DM_Done && (!start_fp_add)) begin // Normal Operation
 //----------------------------------------------------------------------------
 // MACHINE CYCLE 0 and Stall Control
 //----------------------------------------------------------------------------
-
-// `ifndef DISABLE_PIPELINE
-
     // The only data D/H that can occur are RAW.  These are automatically resolved.  
     // In the case of the JUMPS we stall until the adress of the next instruction to be executed is known.
     // The IR value 0xffff I call a "don't care" OpCode value.  
