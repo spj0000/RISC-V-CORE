@@ -2484,14 +2484,14 @@ SW_pin[1] => ~NO_FANOUT~
 SW_pin[2] => ~NO_FANOUT~
 SW_pin[3] => ~NO_FANOUT~
 SW_pin[4] => ~NO_FANOUT~
-Display_pin[0] <= Display_pin[0]~reg0.DB_MAX_OUTPUT_PORT_TYPE
-Display_pin[1] <= Display_pin[1]~reg0.DB_MAX_OUTPUT_PORT_TYPE
-Display_pin[2] <= Display_pin[2]~reg0.DB_MAX_OUTPUT_PORT_TYPE
-Display_pin[3] <= Display_pin[3]~reg0.DB_MAX_OUTPUT_PORT_TYPE
-Display_pin[4] <= Display_pin[4]~reg0.DB_MAX_OUTPUT_PORT_TYPE
-Display_pin[5] <= Display_pin[5]~reg0.DB_MAX_OUTPUT_PORT_TYPE
-Display_pin[6] <= Display_pin[6]~reg0.DB_MAX_OUTPUT_PORT_TYPE
-Display_pin[7] <= Display_pin[7]~reg0.DB_MAX_OUTPUT_PORT_TYPE
+Display_pin[0] << Display_pin[0]~reg0.DB_MAX_OUTPUT_PORT_TYPE
+Display_pin[1] << Display_pin[1]~reg0.DB_MAX_OUTPUT_PORT_TYPE
+Display_pin[2] << Display_pin[2]~reg0.DB_MAX_OUTPUT_PORT_TYPE
+Display_pin[3] << Display_pin[3]~reg0.DB_MAX_OUTPUT_PORT_TYPE
+Display_pin[4] << Display_pin[4]~reg0.DB_MAX_OUTPUT_PORT_TYPE
+Display_pin[5] << Display_pin[5]~reg0.DB_MAX_OUTPUT_PORT_TYPE
+Display_pin[6] << Display_pin[6]~reg0.DB_MAX_OUTPUT_PORT_TYPE
+Display_pin[7] << Display_pin[7]~reg0.DB_MAX_OUTPUT_PORT_TYPE
 
 
 |spj_riscv_core|spj_cache_4w_v2:pm_cache

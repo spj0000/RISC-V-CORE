@@ -9,7 +9,7 @@ z2
 cModel Technology
 Z0 dC:/Users/spjac/OneDrive/Documents/School Work/721 ATDCS Projects/RISC-V-CORE/spj_riscv_core/simulation/modelsim
 vFloat_Add
-Z1 !s110 1708560811
+Z1 !s110 1708569170
 !i10b 1
 !s100 G]N71bkLcnE>3bZ?77BM81
 I5m@^ZMM[8XLA=n0cCLCll3
@@ -23,7 +23,7 @@ Z4 OV;L;10.5b;63
 r1
 !s85 0
 31
-Z5 !s108 1708560811.000000
+Z5 !s108 1708569170.000000
 !s107 C:/Users/spjac/OneDrive/Documents/School Work/721 ATDCS Projects/RISC-V-CORE/spj_riscv_core/spj_fp_adder.v|
 !s90 -reportprogress|300|-vlog01compat|-work|work|+incdir+C:/Users/spjac/OneDrive/Documents/School Work/721 ATDCS Projects/RISC-V-CORE/spj_riscv_core|C:/Users/spjac/OneDrive/Documents/School Work/721 ATDCS Projects/RISC-V-CORE/spj_riscv_core/spj_fp_adder.v|
 !i113 1
@@ -32,13 +32,13 @@ Z7 !s92 -vlog01compat -work work {+incdir+C:/Users/spjac/OneDrive/Documents/Scho
 Z8 tCvgOpt 0
 n@float_@add
 vspj_cache_4w_v2
-R1
+Z9 !s110 1708569171
 !i10b 1
-!s100 o[:]4?hf9WmLna5?><FGz0
-IITZB[SjIn]cefg@QLSbEM1
+!s100 bKf;A2Yi;a4>^6z8?UWzJ2
+IQezIYlWfkf^;OFe=MNHLB0
 R2
 R0
-w1708560758
+w1708569143
 8C:/Users/spjac/OneDrive/Documents/School Work/721 ATDCS Projects/RISC-V-CORE/spj_riscv_core/spj_cache_4w_v2.v
 FC:/Users/spjac/OneDrive/Documents/School Work/721 ATDCS Projects/RISC-V-CORE/spj_riscv_core/spj_cache_4w_v2.v
 L0 21
@@ -46,7 +46,7 @@ R4
 r1
 !s85 0
 31
-R5
+Z10 !s108 1708569171.000000
 !s107 C:/Users/spjac/OneDrive/Documents/School Work/721 ATDCS Projects/RISC-V-CORE/spj_riscv_core/spj_cache_4w_v2.v|
 !s90 -reportprogress|300|-vlog01compat|-work|work|+incdir+C:/Users/spjac/OneDrive/Documents/School Work/721 ATDCS Projects/RISC-V-CORE/spj_riscv_core|C:/Users/spjac/OneDrive/Documents/School Work/721 ATDCS Projects/RISC-V-CORE/spj_riscv_core/spj_cache_4w_v2.v|
 !i113 1
@@ -54,7 +54,7 @@ R6
 R7
 R8
 vspj_cache_v
-R1
+R9
 !i10b 1
 !s100 oAEbbW2ZYgmRQH`PT5Sm^2
 IL;YG_SHn0^^;U40fIeCG43
@@ -63,12 +63,12 @@ R0
 R3
 8C:/Users/spjac/OneDrive/Documents/School Work/721 ATDCS Projects/RISC-V-CORE/spj_riscv_core/spj_cache_v.v
 FC:/Users/spjac/OneDrive/Documents/School Work/721 ATDCS Projects/RISC-V-CORE/spj_riscv_core/spj_cache_v.v
-Z9 L0 39
+Z11 L0 39
 R4
 r1
 !s85 0
 31
-R5
+R10
 !s107 C:/Users/spjac/OneDrive/Documents/School Work/721 ATDCS Projects/RISC-V-CORE/spj_riscv_core/spj_cache_v.v|
 !s90 -reportprogress|300|-vlog01compat|-work|work|+incdir+C:/Users/spjac/OneDrive/Documents/School Work/721 ATDCS Projects/RISC-V-CORE/spj_riscv_core|C:/Users/spjac/OneDrive/Documents/School Work/721 ATDCS Projects/RISC-V-CORE/spj_riscv_core/spj_cache_v.v|
 !i113 1
@@ -76,7 +76,7 @@ R6
 R7
 R8
 vspj_CAM_v2
-R1
+R9
 !i10b 1
 !s100 DK5G[O9?;>lkZ76K@D6^W3
 I0NE8@Ci?8fD[;4b:;2WkI3
@@ -99,7 +99,7 @@ R7
 R8
 nspj_@c@a@m_v2
 vspj_ir2assembly_v
-Z10 !s110 1708560812
+R9
 !i10b 1
 !s100 5E:W0>_<?Qo5KCfYY`N0W3
 IX61X:3`1`DEjno:`QXNTe1
@@ -113,7 +113,7 @@ R4
 r1
 !s85 0
 31
-Z11 !s108 1708560812.000000
+R10
 Z12 !s107 C:/Users/spjac/OneDrive/Documents/School Work/721 ATDCS Projects/RISC-V-CORE/spj_riscv_core/spj_ir2assembly_v.v|C:/Users/spjac/OneDrive/Documents/School Work/721 ATDCS Projects/RISC-V-CORE/spj_riscv_core/spj_risc_core_tb.v|
 Z13 !s90 -reportprogress|300|-vlog01compat|-work|work|+incdir+C:/Users/spjac/OneDrive/Documents/School Work/721 ATDCS Projects/RISC-V-CORE/spj_riscv_core|C:/Users/spjac/OneDrive/Documents/School Work/721 ATDCS Projects/RISC-V-CORE/spj_riscv_core/spj_risc_core_tb.v|
 !i113 1
@@ -121,7 +121,7 @@ R6
 R7
 R8
 vspj_risc_core_tb
-R10
+R9
 !i10b 1
 !s100 mj]PQk70JQB?R`ZPPDC?G1
 Ii^^mI`U3Z3N^nh`hLAR@@0
@@ -135,7 +135,7 @@ R4
 r1
 !s85 0
 31
-R11
+R10
 R12
 R13
 !i113 1
@@ -165,7 +165,7 @@ R6
 R7
 R8
 vspj_riscv_ram1
-R10
+R9
 !i10b 1
 !s100 F];hB1a@]lonBC<e;GZ3L2
 I[:DY5]_Y;O:lMZgNH7M2E3
@@ -174,12 +174,12 @@ R0
 R3
 8C:/Users/spjac/OneDrive/Documents/School Work/721 ATDCS Projects/RISC-V-CORE/spj_riscv_core/spj_riscv_ram1.v
 FC:/Users/spjac/OneDrive/Documents/School Work/721 ATDCS Projects/RISC-V-CORE/spj_riscv_core/spj_riscv_ram1.v
-R9
+R11
 R4
 r1
 !s85 0
 31
-R5
+R10
 !s107 C:/Users/spjac/OneDrive/Documents/School Work/721 ATDCS Projects/RISC-V-CORE/spj_riscv_core/spj_riscv_ram1.v|
 !s90 -reportprogress|300|-vlog01compat|-work|work|+incdir+C:/Users/spjac/OneDrive/Documents/School Work/721 ATDCS Projects/RISC-V-CORE/spj_riscv_core|C:/Users/spjac/OneDrive/Documents/School Work/721 ATDCS Projects/RISC-V-CORE/spj_riscv_core/spj_riscv_ram1.v|
 !i113 1

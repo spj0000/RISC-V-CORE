@@ -85,7 +85,7 @@ reg                                              writeback                      
 reg                                              fetch                                 ; // control signal for multiplexors from fsm
 reg                                              cam_wr                                ; // CAM write enable
 
-reg                                              early_restart                         ; // Early Restart Signal
+reg                                              hw_preset                             ; // Hardware Preset Control Signal
 
 // A "Content Addressable Memory" is used to store the TAG of the blocks stored in the cache
     // Remember, the tags are stored at the group that aligns with the stored block
@@ -156,7 +156,7 @@ always @(posedge Clock) begin : Cache_Controller
         writeback              = 1'd0;
         fetch                  = 1'd0;
         cam_wr                 = 1'd0;
-        early_restart          = 1'd0;
+        hw_preset              = 1'd0;
         mm_word_cnt            = {word_addr_width {1'd0}};
         cm_word_cnt            = {word_addr_width {1'd0}};
         dirty_bit              = {(set_addr_width+group_addr_width){1'd0}};
@@ -169,7 +169,7 @@ always @(posedge Clock) begin : Cache_Controller
             IDLE: begin
                 fetch       = 1'd0;
                 writeback   = 1'd0;
-                early_restart = 1'd0;
+                hw_preset   = 1'd0;
                 mm_word_cnt = {word_addr_width{1'd0}};
                 cm_word_cnt = {word_addr_width{1'd0}};
                 if(!cam_hit) begin // TAG is not stored in CAM -> MISS
@@ -239,14 +239,20 @@ always @(posedge Clock) begin : Cache_Controller
                         cm_word_cnt = cm_word_cnt + 1'd1;
                         if(cam_hit) begin // If the desired word is found
                             Done = 1'd1; // Early Reset Cache Optimization
-                        endcase
+                        end
                         if(~|mm_word_cnt)begin // all words have been fetched from main memory
                             Fetch_State = FETCH3;
                         end
                     end
                     FETCH3: begin
                         Fetch_State = FETCH0; // for next fetch operation
-                        Cache_Controller_State = IDLE; // Fetch operation is complete
+                        if (~hw_preset) begin 
+                            hw_preset = 1'd1;
+                            Cache_Controller_State = FETCH;
+                        end
+                        else begin
+                            Cache_Controller_State = IDLE; // Fetch operation is complete
+                        end
                         fetch = 1'd0;
                         set_replace[group] = set_replace[group] + 1'd1; // next time replace the next set
                     end
