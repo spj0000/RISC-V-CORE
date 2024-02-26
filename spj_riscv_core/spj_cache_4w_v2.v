@@ -193,6 +193,8 @@ always @(posedge Clock) begin : Cache_Controller
                 // Memories evaluate inputs on positive clock edge -> need source address 1 word ahead of dest
                     // This allows for 1 cycle per word
                     // Main Memory write enable should not be high until output of Cache Mem is valid -> 1 cycle startup delay
+
+                    // Read over write priority: check the next address from CPU, if it is a read service the read before executing writeback states
                 case (Writeback_State)
                     WRITEBACK0: begin // First cycle of writeback, reset dirty bit
                         Writeback_State = WRITEBACK1;
@@ -246,15 +248,18 @@ always @(posedge Clock) begin : Cache_Controller
                     end
                     FETCH3: begin
                         Fetch_State = FETCH0; // for next fetch operation
-                        if (~hw_preset) begin 
-                            hw_preset = 1'd1;
-                            Cache_Controller_State = FETCH;
+                        fetch = 1'd0;
+                        set_replace[group] = set_replace[group] + 1'd1; // next time replace the next set
+                        if (~hw_preset) begin // Check if the dirty bit is high if so dont prefetch
+                            if (~dirty_bit[{set_control,group}]) begin
+                                hw_preset = 1'd1;
+                                Cache_Controller_State = FETCH;
+                            end
                         end
                         else begin
                             Cache_Controller_State = IDLE; // Fetch operation is complete
                         end
-                        fetch = 1'd0;
-                        set_replace[group] = set_replace[group] + 1'd1; // next time replace the next set
+                        
                     end
                 endcase // Fetch_State
             end // FETCH
