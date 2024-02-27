@@ -175,6 +175,11 @@ always @(posedge Clock) begin : Cache_Controller
                 if(!cam_hit) begin // TAG is not stored in CAM -> MISS
                     Done = 1'd0; // STALL CPU
                     if(dirty_bit[{set_control,group}]) begin
+                        // Read Priority over writes: THIS WILL NEVER WORK AS WE CAN ONLY OPERATE ON A SINGULAR ADDRESS AT A TIME
+                        // WOULD TO HAVE TO PIPELINE THE CACHE IN ORDER FOR THIS OPTIMIZATION TO FUNCTION
+                        if(cam_hit) begin // we have a hit THIS WILL NEVER WORK
+                            Done = 1'd1; // Serve the read
+                        end
                         Cache_Controller_State = WRITEBACK;
                     end
                     else begin

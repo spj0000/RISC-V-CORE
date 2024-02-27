@@ -1,5 +1,5 @@
 Analysis & Elaboration report for spj_riscv_core
-Mon Feb 26 13:32:42 2024
+Tue Feb 27 18:36:17 2024
 Quartus Prime Version 18.0.0 Build 614 04/24/2018 SJ Lite Edition
 
 
@@ -59,7 +59,7 @@ refer to the applicable agreement for further details.
 +-----------------------------------------------------------------------------+
 ; Analysis & Elaboration Summary                                              ;
 +-------------------------------+---------------------------------------------+
-; Analysis & Elaboration Status ; Successful - Mon Feb 26 13:32:42 2024       ;
+; Analysis & Elaboration Status ; Successful - Tue Feb 27 18:36:17 2024       ;
 ; Quartus Prime Version         ; 18.0.0 Build 614 04/24/2018 SJ Lite Edition ;
 ; Revision Name                 ; spj_riscv_core                              ;
 ; Top-level Entity Name         ; spj_riscv_core                              ;
@@ -79,8 +79,8 @@ refer to the applicable agreement for further details.
 +----------------------------+-------------+
 ; Processors                 ; Number      ;
 +----------------------------+-------------+
-; Number detected on machine ; 20          ;
-; Maximum allowed            ; 14          ;
+; Number detected on machine ; 12          ;
+; Maximum allowed            ; 12          ;
 ;                            ;             ;
 ; Average used               ; 1.00        ;
 ; Maximum used               ; 1           ;
@@ -656,40 +656,40 @@ Note: In order to hide this table in the UI and the text report file, please set
 Info: *******************************************************************
 Info: Running Quartus Prime Analysis & Elaboration
     Info: Version 18.0.0 Build 614 04/24/2018 SJ Lite Edition
-    Info: Processing started: Mon Feb 26 13:32:34 2024
+    Info: Processing started: Tue Feb 27 18:35:53 2024
 Info: Command: quartus_map --read_settings_files=on --write_settings_files=off spj_riscv_core -c spj_riscv_core --analysis_and_elaboration
 Warning (18236): Number of processors has not been specified which may cause overloading on shared machines.  Set the global assignment NUM_PARALLEL_PROCESSORS in your QSF to an appropriate value for best performance.
-Info (20030): Parallel compilation is enabled and will use 14 of the 14 processors detected
+Info (20030): Parallel compilation is enabled and will use 12 of the 12 processors detected
 Info (12021): Found 1 design units, including 1 entities, in source file spj_fp_adder.v
-    Info (12023): Found entity 1: Float_Add File: C:/Users/spjac/OneDrive/Documents/School_Work/EE721-ATDCS/RISC-V-CORE/spj_riscv_core/spj_fp_adder.v Line: 9
+    Info (12023): Found entity 1: Float_Add File: C:/Users/spjac/OneDrive/Documents/School Work/721 ATDCS Projects/RISC-V-CORE/spj_riscv_core/spj_fp_adder.v Line: 9
 Info (12021): Found 2 design units, including 2 entities, in source file spj_risc_core_tb.v
-    Info (12023): Found entity 1: spj_ir2assembly_v File: C:/Users/spjac/OneDrive/Documents/School_Work/EE721-ATDCS/RISC-V-CORE/spj_riscv_core/spj_ir2assembly_v.v Line: 1
-    Info (12023): Found entity 2: spj_risc_core_tb File: C:/Users/spjac/OneDrive/Documents/School_Work/EE721-ATDCS/RISC-V-CORE/spj_riscv_core/spj_risc_core_tb.v Line: 8
+    Info (12023): Found entity 1: spj_ir2assembly_v File: C:/Users/spjac/OneDrive/Documents/School Work/721 ATDCS Projects/RISC-V-CORE/spj_riscv_core/spj_ir2assembly_v.v Line: 1
+    Info (12023): Found entity 2: spj_risc_core_tb File: C:/Users/spjac/OneDrive/Documents/School Work/721 ATDCS Projects/RISC-V-CORE/spj_riscv_core/spj_risc_core_tb.v Line: 8
 Info (12021): Found 1 design units, including 1 entities, in source file spjrisc521_ram1.v
-    Info (12023): Found entity 1: spjRISC521_ram1 File: C:/Users/spjac/OneDrive/Documents/School_Work/EE721-ATDCS/RISC-V-CORE/spj_riscv_core/spjRISC521_ram1.v Line: 39
+    Info (12023): Found entity 1: spjRISC521_ram1 File: C:/Users/spjac/OneDrive/Documents/School Work/721 ATDCS Projects/RISC-V-CORE/spj_riscv_core/spjRISC521_ram1.v Line: 39
 Info (12021): Found 1 design units, including 1 entities, in source file spj_riscv_core.v
-    Info (12023): Found entity 1: spj_riscv_core File: C:/Users/spjac/OneDrive/Documents/School_Work/EE721-ATDCS/RISC-V-CORE/spj_riscv_core/spj_riscv_core.v Line: 12
+    Info (12023): Found entity 1: spj_riscv_core File: C:/Users/spjac/OneDrive/Documents/School Work/721 ATDCS Projects/RISC-V-CORE/spj_riscv_core/spj_riscv_core.v Line: 12
 Info (12021): Found 1 design units, including 1 entities, in source file spj_cam_v2.v
-    Info (12023): Found entity 1: spj_CAM_v2 File: C:/Users/spjac/OneDrive/Documents/School_Work/EE721-ATDCS/RISC-V-CORE/spj_riscv_core/spj_CAM_v2.v Line: 8
+    Info (12023): Found entity 1: spj_CAM_v2 File: C:/Users/spjac/OneDrive/Documents/School Work/721 ATDCS Projects/RISC-V-CORE/spj_riscv_core/spj_CAM_v2.v Line: 8
 Info (12021): Found 1 design units, including 1 entities, in source file spj_cache_v.v
-    Info (12023): Found entity 1: spj_cache_v File: C:/Users/spjac/OneDrive/Documents/School_Work/EE721-ATDCS/RISC-V-CORE/spj_riscv_core/spj_cache_v.v Line: 39
+    Info (12023): Found entity 1: spj_cache_v File: C:/Users/spjac/OneDrive/Documents/School Work/721 ATDCS Projects/RISC-V-CORE/spj_riscv_core/spj_cache_v.v Line: 39
 Info (12021): Found 1 design units, including 1 entities, in source file spj_cache_4w_v2.v
-    Info (12023): Found entity 1: spj_cache_4w_v2 File: C:/Users/spjac/OneDrive/Documents/School_Work/EE721-ATDCS/RISC-V-CORE/spj_riscv_core/spj_cache_4w_v2.v Line: 21
+    Info (12023): Found entity 1: spj_cache_4w_v2 File: C:/Users/spjac/OneDrive/Documents/School Work/721 ATDCS Projects/RISC-V-CORE/spj_riscv_core/spj_cache_4w_v2.v Line: 21
 Info (12021): Found 1 design units, including 1 entities, in source file spj_riscv_ram1.v
-    Info (12023): Found entity 1: spj_riscv_ram1 File: C:/Users/spjac/OneDrive/Documents/School_Work/EE721-ATDCS/RISC-V-CORE/spj_riscv_core/spj_riscv_ram1.v Line: 39
-Warning (10236): Verilog HDL Implicit Net warning at spj_fp_adder.v(38): created implicit net for "add_carry" File: C:/Users/spjac/OneDrive/Documents/School_Work/EE721-ATDCS/RISC-V-CORE/spj_riscv_core/spj_fp_adder.v Line: 38
-Warning (10236): Verilog HDL Implicit Net warning at spj_fp_adder.v(39): created implicit net for "sub_borrow" File: C:/Users/spjac/OneDrive/Documents/School_Work/EE721-ATDCS/RISC-V-CORE/spj_riscv_core/spj_fp_adder.v Line: 39
+    Info (12023): Found entity 1: spj_riscv_ram1 File: C:/Users/spjac/OneDrive/Documents/School Work/721 ATDCS Projects/RISC-V-CORE/spj_riscv_core/spj_riscv_ram1.v Line: 39
+Warning (10236): Verilog HDL Implicit Net warning at spj_fp_adder.v(38): created implicit net for "add_carry" File: C:/Users/spjac/OneDrive/Documents/School Work/721 ATDCS Projects/RISC-V-CORE/spj_riscv_core/spj_fp_adder.v Line: 38
+Warning (10236): Verilog HDL Implicit Net warning at spj_fp_adder.v(39): created implicit net for "sub_borrow" File: C:/Users/spjac/OneDrive/Documents/School Work/721 ATDCS Projects/RISC-V-CORE/spj_riscv_core/spj_fp_adder.v Line: 39
 Info (12127): Elaborating entity "spj_riscv_core" for the top level hierarchy
-Warning (10036): Verilog HDL or VHDL warning at spj_riscv_core.v(37): object "SP" assigned a value but never read File: C:/Users/spjac/OneDrive/Documents/School_Work/EE721-ATDCS/RISC-V-CORE/spj_riscv_core/spj_riscv_core.v Line: 37
-Warning (10036): Verilog HDL or VHDL warning at spj_riscv_core.v(49): object "TALUL" assigned a value but never read File: C:/Users/spjac/OneDrive/Documents/School_Work/EE721-ATDCS/RISC-V-CORE/spj_riscv_core/spj_riscv_core.v Line: 49
-Warning (10855): Verilog HDL warning at spj_riscv_core.v(167): initial value for variable FP should be constant File: C:/Users/spjac/OneDrive/Documents/School_Work/EE721-ATDCS/RISC-V-CORE/spj_riscv_core/spj_riscv_core.v Line: 167
-Info (12128): Elaborating entity "spj_cache_4w_v2" for hierarchy "spj_cache_4w_v2:pm_cache" File: C:/Users/spjac/OneDrive/Documents/School_Work/EE721-ATDCS/RISC-V-CORE/spj_riscv_core/spj_riscv_core.v Line: 140
-Warning (10027): Verilog HDL or VHDL warning at the spj_cache_4w_v2.v(110): index expression is not wide enough to address all of the elements in the array File: C:/Users/spjac/OneDrive/Documents/School_Work/EE721-ATDCS/RISC-V-CORE/spj_riscv_core/spj_cache_4w_v2.v Line: 110
-Info (12128): Elaborating entity "spj_CAM_v2" for hierarchy "spj_cache_4w_v2:pm_cache|spj_CAM_v2:tag_mem" File: C:/Users/spjac/OneDrive/Documents/School_Work/EE721-ATDCS/RISC-V-CORE/spj_riscv_core/spj_cache_4w_v2.v Line: 105
-Info (12128): Elaborating entity "spj_riscv_ram1" for hierarchy "spj_cache_4w_v2:pm_cache|spj_riscv_ram1:main_mem" File: C:/Users/spjac/OneDrive/Documents/School_Work/EE721-ATDCS/RISC-V-CORE/spj_riscv_core/spj_cache_4w_v2.v Line: 130
-Info (12128): Elaborating entity "altsyncram" for hierarchy "spj_cache_4w_v2:pm_cache|spj_riscv_ram1:main_mem|altsyncram:altsyncram_component" File: C:/Users/spjac/OneDrive/Documents/School_Work/EE721-ATDCS/RISC-V-CORE/spj_riscv_core/spj_riscv_ram1.v Line: 85
-Info (12130): Elaborated megafunction instantiation "spj_cache_4w_v2:pm_cache|spj_riscv_ram1:main_mem|altsyncram:altsyncram_component" File: C:/Users/spjac/OneDrive/Documents/School_Work/EE721-ATDCS/RISC-V-CORE/spj_riscv_core/spj_riscv_ram1.v Line: 85
-Info (12133): Instantiated megafunction "spj_cache_4w_v2:pm_cache|spj_riscv_ram1:main_mem|altsyncram:altsyncram_component" with the following parameter: File: C:/Users/spjac/OneDrive/Documents/School_Work/EE721-ATDCS/RISC-V-CORE/spj_riscv_core/spj_riscv_ram1.v Line: 85
+Warning (10036): Verilog HDL or VHDL warning at spj_riscv_core.v(37): object "SP" assigned a value but never read File: C:/Users/spjac/OneDrive/Documents/School Work/721 ATDCS Projects/RISC-V-CORE/spj_riscv_core/spj_riscv_core.v Line: 37
+Warning (10036): Verilog HDL or VHDL warning at spj_riscv_core.v(49): object "TALUL" assigned a value but never read File: C:/Users/spjac/OneDrive/Documents/School Work/721 ATDCS Projects/RISC-V-CORE/spj_riscv_core/spj_riscv_core.v Line: 49
+Warning (10855): Verilog HDL warning at spj_riscv_core.v(167): initial value for variable FP should be constant File: C:/Users/spjac/OneDrive/Documents/School Work/721 ATDCS Projects/RISC-V-CORE/spj_riscv_core/spj_riscv_core.v Line: 167
+Info (12128): Elaborating entity "spj_cache_4w_v2" for hierarchy "spj_cache_4w_v2:pm_cache" File: C:/Users/spjac/OneDrive/Documents/School Work/721 ATDCS Projects/RISC-V-CORE/spj_riscv_core/spj_riscv_core.v Line: 140
+Warning (10027): Verilog HDL or VHDL warning at the spj_cache_4w_v2.v(110): index expression is not wide enough to address all of the elements in the array File: C:/Users/spjac/OneDrive/Documents/School Work/721 ATDCS Projects/RISC-V-CORE/spj_riscv_core/spj_cache_4w_v2.v Line: 110
+Info (12128): Elaborating entity "spj_CAM_v2" for hierarchy "spj_cache_4w_v2:pm_cache|spj_CAM_v2:tag_mem" File: C:/Users/spjac/OneDrive/Documents/School Work/721 ATDCS Projects/RISC-V-CORE/spj_riscv_core/spj_cache_4w_v2.v Line: 105
+Info (12128): Elaborating entity "spj_riscv_ram1" for hierarchy "spj_cache_4w_v2:pm_cache|spj_riscv_ram1:main_mem" File: C:/Users/spjac/OneDrive/Documents/School Work/721 ATDCS Projects/RISC-V-CORE/spj_riscv_core/spj_cache_4w_v2.v Line: 130
+Info (12128): Elaborating entity "altsyncram" for hierarchy "spj_cache_4w_v2:pm_cache|spj_riscv_ram1:main_mem|altsyncram:altsyncram_component" File: C:/Users/spjac/OneDrive/Documents/School Work/721 ATDCS Projects/RISC-V-CORE/spj_riscv_core/spj_riscv_ram1.v Line: 85
+Info (12130): Elaborated megafunction instantiation "spj_cache_4w_v2:pm_cache|spj_riscv_ram1:main_mem|altsyncram:altsyncram_component" File: C:/Users/spjac/OneDrive/Documents/School Work/721 ATDCS Projects/RISC-V-CORE/spj_riscv_core/spj_riscv_ram1.v Line: 85
+Info (12133): Instantiated megafunction "spj_cache_4w_v2:pm_cache|spj_riscv_ram1:main_mem|altsyncram:altsyncram_component" with the following parameter: File: C:/Users/spjac/OneDrive/Documents/School Work/721 ATDCS Projects/RISC-V-CORE/spj_riscv_core/spj_riscv_ram1.v Line: 85
     Info (12134): Parameter "clock_enable_input_a" = "BYPASS"
     Info (12134): Parameter "clock_enable_output_a" = "BYPASS"
     Info (12134): Parameter "intended_device_family" = "Cyclone V"
@@ -706,21 +706,21 @@ Info (12133): Instantiated megafunction "spj_cache_4w_v2:pm_cache|spj_riscv_ram1
     Info (12134): Parameter "width_byteena_a" = "1"
     Info (12134): Parameter "init_file" = "spjRISC521_rom1.mif"
 Info (12021): Found 1 design units, including 1 entities, in source file db/altsyncram_hbp1.tdf
-    Info (12023): Found entity 1: altsyncram_hbp1 File: C:/Users/spjac/OneDrive/Documents/School_Work/EE721-ATDCS/RISC-V-CORE/spj_riscv_core/db/altsyncram_hbp1.tdf Line: 33
+    Info (12023): Found entity 1: altsyncram_hbp1 File: C:/Users/spjac/OneDrive/Documents/School Work/721 ATDCS Projects/RISC-V-CORE/spj_riscv_core/db/altsyncram_hbp1.tdf Line: 33
 Info (12128): Elaborating entity "altsyncram_hbp1" for hierarchy "spj_cache_4w_v2:pm_cache|spj_riscv_ram1:main_mem|altsyncram:altsyncram_component|altsyncram_hbp1:auto_generated" File: c:/intelfpga_lite/18.0/quartus/libraries/megafunctions/altsyncram.tdf Line: 791
 Info (12021): Found 1 design units, including 1 entities, in source file db/decode_dla.tdf
-    Info (12023): Found entity 1: decode_dla File: C:/Users/spjac/OneDrive/Documents/School_Work/EE721-ATDCS/RISC-V-CORE/spj_riscv_core/db/decode_dla.tdf Line: 22
-Info (12128): Elaborating entity "decode_dla" for hierarchy "spj_cache_4w_v2:pm_cache|spj_riscv_ram1:main_mem|altsyncram:altsyncram_component|altsyncram_hbp1:auto_generated|decode_dla:decode3" File: C:/Users/spjac/OneDrive/Documents/School_Work/EE721-ATDCS/RISC-V-CORE/spj_riscv_core/db/altsyncram_hbp1.tdf Line: 43
+    Info (12023): Found entity 1: decode_dla File: C:/Users/spjac/OneDrive/Documents/School Work/721 ATDCS Projects/RISC-V-CORE/spj_riscv_core/db/decode_dla.tdf Line: 22
+Info (12128): Elaborating entity "decode_dla" for hierarchy "spj_cache_4w_v2:pm_cache|spj_riscv_ram1:main_mem|altsyncram:altsyncram_component|altsyncram_hbp1:auto_generated|decode_dla:decode3" File: C:/Users/spjac/OneDrive/Documents/School Work/721 ATDCS Projects/RISC-V-CORE/spj_riscv_core/db/altsyncram_hbp1.tdf Line: 43
 Info (12021): Found 1 design units, including 1 entities, in source file db/decode_61a.tdf
-    Info (12023): Found entity 1: decode_61a File: C:/Users/spjac/OneDrive/Documents/School_Work/EE721-ATDCS/RISC-V-CORE/spj_riscv_core/db/decode_61a.tdf Line: 22
-Info (12128): Elaborating entity "decode_61a" for hierarchy "spj_cache_4w_v2:pm_cache|spj_riscv_ram1:main_mem|altsyncram:altsyncram_component|altsyncram_hbp1:auto_generated|decode_61a:rden_decode" File: C:/Users/spjac/OneDrive/Documents/School_Work/EE721-ATDCS/RISC-V-CORE/spj_riscv_core/db/altsyncram_hbp1.tdf Line: 44
+    Info (12023): Found entity 1: decode_61a File: C:/Users/spjac/OneDrive/Documents/School Work/721 ATDCS Projects/RISC-V-CORE/spj_riscv_core/db/decode_61a.tdf Line: 22
+Info (12128): Elaborating entity "decode_61a" for hierarchy "spj_cache_4w_v2:pm_cache|spj_riscv_ram1:main_mem|altsyncram:altsyncram_component|altsyncram_hbp1:auto_generated|decode_61a:rden_decode" File: C:/Users/spjac/OneDrive/Documents/School Work/721 ATDCS Projects/RISC-V-CORE/spj_riscv_core/db/altsyncram_hbp1.tdf Line: 44
 Info (12021): Found 1 design units, including 1 entities, in source file db/mux_ahb.tdf
-    Info (12023): Found entity 1: mux_ahb File: C:/Users/spjac/OneDrive/Documents/School_Work/EE721-ATDCS/RISC-V-CORE/spj_riscv_core/db/mux_ahb.tdf Line: 22
-Info (12128): Elaborating entity "mux_ahb" for hierarchy "spj_cache_4w_v2:pm_cache|spj_riscv_ram1:main_mem|altsyncram:altsyncram_component|altsyncram_hbp1:auto_generated|mux_ahb:mux2" File: C:/Users/spjac/OneDrive/Documents/School_Work/EE721-ATDCS/RISC-V-CORE/spj_riscv_core/db/altsyncram_hbp1.tdf Line: 45
-Info (12128): Elaborating entity "spj_cache_v" for hierarchy "spj_cache_4w_v2:pm_cache|spj_cache_v:cache_mem" File: C:/Users/spjac/OneDrive/Documents/School_Work/EE721-ATDCS/RISC-V-CORE/spj_riscv_core/spj_cache_4w_v2.v Line: 139
-Info (12128): Elaborating entity "altsyncram" for hierarchy "spj_cache_4w_v2:pm_cache|spj_cache_v:cache_mem|altsyncram:altsyncram_component" File: C:/Users/spjac/OneDrive/Documents/School_Work/EE721-ATDCS/RISC-V-CORE/spj_riscv_core/spj_cache_v.v Line: 85
-Info (12130): Elaborated megafunction instantiation "spj_cache_4w_v2:pm_cache|spj_cache_v:cache_mem|altsyncram:altsyncram_component" File: C:/Users/spjac/OneDrive/Documents/School_Work/EE721-ATDCS/RISC-V-CORE/spj_riscv_core/spj_cache_v.v Line: 85
-Info (12133): Instantiated megafunction "spj_cache_4w_v2:pm_cache|spj_cache_v:cache_mem|altsyncram:altsyncram_component" with the following parameter: File: C:/Users/spjac/OneDrive/Documents/School_Work/EE721-ATDCS/RISC-V-CORE/spj_riscv_core/spj_cache_v.v Line: 85
+    Info (12023): Found entity 1: mux_ahb File: C:/Users/spjac/OneDrive/Documents/School Work/721 ATDCS Projects/RISC-V-CORE/spj_riscv_core/db/mux_ahb.tdf Line: 22
+Info (12128): Elaborating entity "mux_ahb" for hierarchy "spj_cache_4w_v2:pm_cache|spj_riscv_ram1:main_mem|altsyncram:altsyncram_component|altsyncram_hbp1:auto_generated|mux_ahb:mux2" File: C:/Users/spjac/OneDrive/Documents/School Work/721 ATDCS Projects/RISC-V-CORE/spj_riscv_core/db/altsyncram_hbp1.tdf Line: 45
+Info (12128): Elaborating entity "spj_cache_v" for hierarchy "spj_cache_4w_v2:pm_cache|spj_cache_v:cache_mem" File: C:/Users/spjac/OneDrive/Documents/School Work/721 ATDCS Projects/RISC-V-CORE/spj_riscv_core/spj_cache_4w_v2.v Line: 139
+Info (12128): Elaborating entity "altsyncram" for hierarchy "spj_cache_4w_v2:pm_cache|spj_cache_v:cache_mem|altsyncram:altsyncram_component" File: C:/Users/spjac/OneDrive/Documents/School Work/721 ATDCS Projects/RISC-V-CORE/spj_riscv_core/spj_cache_v.v Line: 85
+Info (12130): Elaborated megafunction instantiation "spj_cache_4w_v2:pm_cache|spj_cache_v:cache_mem|altsyncram:altsyncram_component" File: C:/Users/spjac/OneDrive/Documents/School Work/721 ATDCS Projects/RISC-V-CORE/spj_riscv_core/spj_cache_v.v Line: 85
+Info (12133): Instantiated megafunction "spj_cache_4w_v2:pm_cache|spj_cache_v:cache_mem|altsyncram:altsyncram_component" with the following parameter: File: C:/Users/spjac/OneDrive/Documents/School Work/721 ATDCS Projects/RISC-V-CORE/spj_riscv_core/spj_cache_v.v Line: 85
     Info (12134): Parameter "clock_enable_input_a" = "BYPASS"
     Info (12134): Parameter "clock_enable_output_a" = "BYPASS"
     Info (12134): Parameter "intended_device_family" = "Cyclone V"
@@ -736,14 +736,14 @@ Info (12133): Instantiated megafunction "spj_cache_4w_v2:pm_cache|spj_cache_v:ca
     Info (12134): Parameter "width_a" = "32"
     Info (12134): Parameter "width_byteena_a" = "1"
 Info (12021): Found 1 design units, including 1 entities, in source file db/altsyncram_5dm1.tdf
-    Info (12023): Found entity 1: altsyncram_5dm1 File: C:/Users/spjac/OneDrive/Documents/School_Work/EE721-ATDCS/RISC-V-CORE/spj_riscv_core/db/altsyncram_5dm1.tdf Line: 27
+    Info (12023): Found entity 1: altsyncram_5dm1 File: C:/Users/spjac/OneDrive/Documents/School Work/721 ATDCS Projects/RISC-V-CORE/spj_riscv_core/db/altsyncram_5dm1.tdf Line: 27
 Info (12128): Elaborating entity "altsyncram_5dm1" for hierarchy "spj_cache_4w_v2:pm_cache|spj_cache_v:cache_mem|altsyncram:altsyncram_component|altsyncram_5dm1:auto_generated" File: c:/intelfpga_lite/18.0/quartus/libraries/megafunctions/altsyncram.tdf Line: 791
-Info (12128): Elaborating entity "spj_cache_4w_v2" for hierarchy "spj_cache_4w_v2:dm_cache" File: C:/Users/spjac/OneDrive/Documents/School_Work/EE721-ATDCS/RISC-V-CORE/spj_riscv_core/spj_riscv_core.v Line: 151
-Warning (10027): Verilog HDL or VHDL warning at the spj_cache_4w_v2.v(110): index expression is not wide enough to address all of the elements in the array File: C:/Users/spjac/OneDrive/Documents/School_Work/EE721-ATDCS/RISC-V-CORE/spj_riscv_core/spj_cache_4w_v2.v Line: 110
-Info (12128): Elaborating entity "spj_riscv_ram1" for hierarchy "spj_cache_4w_v2:dm_cache|spj_riscv_ram1:main_mem" File: C:/Users/spjac/OneDrive/Documents/School_Work/EE721-ATDCS/RISC-V-CORE/spj_riscv_core/spj_cache_4w_v2.v Line: 130
-Info (12128): Elaborating entity "altsyncram" for hierarchy "spj_cache_4w_v2:dm_cache|spj_riscv_ram1:main_mem|altsyncram:altsyncram_component" File: C:/Users/spjac/OneDrive/Documents/School_Work/EE721-ATDCS/RISC-V-CORE/spj_riscv_core/spj_riscv_ram1.v Line: 85
-Info (12130): Elaborated megafunction instantiation "spj_cache_4w_v2:dm_cache|spj_riscv_ram1:main_mem|altsyncram:altsyncram_component" File: C:/Users/spjac/OneDrive/Documents/School_Work/EE721-ATDCS/RISC-V-CORE/spj_riscv_core/spj_riscv_ram1.v Line: 85
-Info (12133): Instantiated megafunction "spj_cache_4w_v2:dm_cache|spj_riscv_ram1:main_mem|altsyncram:altsyncram_component" with the following parameter: File: C:/Users/spjac/OneDrive/Documents/School_Work/EE721-ATDCS/RISC-V-CORE/spj_riscv_core/spj_riscv_ram1.v Line: 85
+Info (12128): Elaborating entity "spj_cache_4w_v2" for hierarchy "spj_cache_4w_v2:dm_cache" File: C:/Users/spjac/OneDrive/Documents/School Work/721 ATDCS Projects/RISC-V-CORE/spj_riscv_core/spj_riscv_core.v Line: 151
+Warning (10027): Verilog HDL or VHDL warning at the spj_cache_4w_v2.v(110): index expression is not wide enough to address all of the elements in the array File: C:/Users/spjac/OneDrive/Documents/School Work/721 ATDCS Projects/RISC-V-CORE/spj_riscv_core/spj_cache_4w_v2.v Line: 110
+Info (12128): Elaborating entity "spj_riscv_ram1" for hierarchy "spj_cache_4w_v2:dm_cache|spj_riscv_ram1:main_mem" File: C:/Users/spjac/OneDrive/Documents/School Work/721 ATDCS Projects/RISC-V-CORE/spj_riscv_core/spj_cache_4w_v2.v Line: 130
+Info (12128): Elaborating entity "altsyncram" for hierarchy "spj_cache_4w_v2:dm_cache|spj_riscv_ram1:main_mem|altsyncram:altsyncram_component" File: C:/Users/spjac/OneDrive/Documents/School Work/721 ATDCS Projects/RISC-V-CORE/spj_riscv_core/spj_riscv_ram1.v Line: 85
+Info (12130): Elaborated megafunction instantiation "spj_cache_4w_v2:dm_cache|spj_riscv_ram1:main_mem|altsyncram:altsyncram_component" File: C:/Users/spjac/OneDrive/Documents/School Work/721 ATDCS Projects/RISC-V-CORE/spj_riscv_core/spj_riscv_ram1.v Line: 85
+Info (12133): Instantiated megafunction "spj_cache_4w_v2:dm_cache|spj_riscv_ram1:main_mem|altsyncram:altsyncram_component" with the following parameter: File: C:/Users/spjac/OneDrive/Documents/School Work/721 ATDCS Projects/RISC-V-CORE/spj_riscv_core/spj_riscv_ram1.v Line: 85
     Info (12134): Parameter "clock_enable_input_a" = "BYPASS"
     Info (12134): Parameter "clock_enable_output_a" = "BYPASS"
     Info (12134): Parameter "intended_device_family" = "Cyclone V"
@@ -760,25 +760,25 @@ Info (12133): Instantiated megafunction "spj_cache_4w_v2:dm_cache|spj_riscv_ram1
     Info (12134): Parameter "width_byteena_a" = "1"
     Info (12134): Parameter "init_file" = "spj_dm_rom.mif"
 Info (12021): Found 1 design units, including 1 entities, in source file db/altsyncram_71p1.tdf
-    Info (12023): Found entity 1: altsyncram_71p1 File: C:/Users/spjac/OneDrive/Documents/School_Work/EE721-ATDCS/RISC-V-CORE/spj_riscv_core/db/altsyncram_71p1.tdf Line: 33
+    Info (12023): Found entity 1: altsyncram_71p1 File: C:/Users/spjac/OneDrive/Documents/School Work/721 ATDCS Projects/RISC-V-CORE/spj_riscv_core/db/altsyncram_71p1.tdf Line: 33
 Info (12128): Elaborating entity "altsyncram_71p1" for hierarchy "spj_cache_4w_v2:dm_cache|spj_riscv_ram1:main_mem|altsyncram:altsyncram_component|altsyncram_71p1:auto_generated" File: c:/intelfpga_lite/18.0/quartus/libraries/megafunctions/altsyncram.tdf Line: 791
-Info (12128): Elaborating entity "Float_Add" for hierarchy "Float_Add:spj_fp_add" File: C:/Users/spjac/OneDrive/Documents/School_Work/EE721-ATDCS/RISC-V-CORE/spj_riscv_core/spj_riscv_core.v Line: 164
-Warning (10240): Verilog HDL Always Construct warning at spj_fp_adder.v(63): inferring latch(es) for variable "expsub", which holds its previous value in one or more paths through the always construct File: C:/Users/spjac/OneDrive/Documents/School_Work/EE721-ATDCS/RISC-V-CORE/spj_riscv_core/spj_fp_adder.v Line: 63
-Warning (10240): Verilog HDL Always Construct warning at spj_fp_adder.v(63): inferring latch(es) for variable "abs_diff", which holds its previous value in one or more paths through the always construct File: C:/Users/spjac/OneDrive/Documents/School_Work/EE721-ATDCS/RISC-V-CORE/spj_riscv_core/spj_fp_adder.v Line: 63
-Warning (10240): Verilog HDL Always Construct warning at spj_fp_adder.v(63): inferring latch(es) for variable "X_mantissa", which holds its previous value in one or more paths through the always construct File: C:/Users/spjac/OneDrive/Documents/School_Work/EE721-ATDCS/RISC-V-CORE/spj_riscv_core/spj_fp_adder.v Line: 63
-Warning (10240): Verilog HDL Always Construct warning at spj_fp_adder.v(63): inferring latch(es) for variable "Y_mantissa", which holds its previous value in one or more paths through the always construct File: C:/Users/spjac/OneDrive/Documents/School_Work/EE721-ATDCS/RISC-V-CORE/spj_riscv_core/spj_fp_adder.v Line: 63
+Info (12128): Elaborating entity "Float_Add" for hierarchy "Float_Add:spj_fp_add" File: C:/Users/spjac/OneDrive/Documents/School Work/721 ATDCS Projects/RISC-V-CORE/spj_riscv_core/spj_riscv_core.v Line: 164
+Warning (10240): Verilog HDL Always Construct warning at spj_fp_adder.v(63): inferring latch(es) for variable "expsub", which holds its previous value in one or more paths through the always construct File: C:/Users/spjac/OneDrive/Documents/School Work/721 ATDCS Projects/RISC-V-CORE/spj_riscv_core/spj_fp_adder.v Line: 63
+Warning (10240): Verilog HDL Always Construct warning at spj_fp_adder.v(63): inferring latch(es) for variable "abs_diff", which holds its previous value in one or more paths through the always construct File: C:/Users/spjac/OneDrive/Documents/School Work/721 ATDCS Projects/RISC-V-CORE/spj_riscv_core/spj_fp_adder.v Line: 63
+Warning (10240): Verilog HDL Always Construct warning at spj_fp_adder.v(63): inferring latch(es) for variable "X_mantissa", which holds its previous value in one or more paths through the always construct File: C:/Users/spjac/OneDrive/Documents/School Work/721 ATDCS Projects/RISC-V-CORE/spj_riscv_core/spj_fp_adder.v Line: 63
+Warning (10240): Verilog HDL Always Construct warning at spj_fp_adder.v(63): inferring latch(es) for variable "Y_mantissa", which holds its previous value in one or more paths through the always construct File: C:/Users/spjac/OneDrive/Documents/School Work/721 ATDCS Projects/RISC-V-CORE/spj_riscv_core/spj_fp_adder.v Line: 63
 Warning (12241): 2 hierarchies have connectivity warnings - see the Connectivity Checks report folder
-Info (144001): Generated suppressed messages file C:/Users/spjac/OneDrive/Documents/School_Work/EE721-ATDCS/RISC-V-CORE/spj_riscv_core/output_files/spj_riscv_core.map.smsg
+Info (144001): Generated suppressed messages file C:/Users/spjac/OneDrive/Documents/School Work/721 ATDCS Projects/RISC-V-CORE/spj_riscv_core/output_files/spj_riscv_core.map.smsg
 Info: Quartus Prime Analysis & Elaboration was successful. 0 errors, 13 warnings
-    Info: Peak virtual memory: 4840 megabytes
-    Info: Processing ended: Mon Feb 26 13:32:42 2024
-    Info: Elapsed time: 00:00:08
-    Info: Total CPU time (on all processors): 00:00:05
+    Info: Peak virtual memory: 4848 megabytes
+    Info: Processing ended: Tue Feb 27 18:36:17 2024
+    Info: Elapsed time: 00:00:24
+    Info: Total CPU time (on all processors): 00:00:30
 
 
 +--------------------------------------------+
 ; Analysis & Elaboration Suppressed Messages ;
 +--------------------------------------------+
-The suppressed messages can be found in C:/Users/spjac/OneDrive/Documents/School_Work/EE721-ATDCS/RISC-V-CORE/spj_riscv_core/output_files/spj_riscv_core.map.smsg.
+The suppressed messages can be found in C:/Users/spjac/OneDrive/Documents/School Work/721 ATDCS Projects/RISC-V-CORE/spj_riscv_core/output_files/spj_riscv_core.map.smsg.
 
 
